@@ -187,10 +187,7 @@ export default function FormCotizacion() {
               <div className="space-y-4">
                 {config && (
                   <div className="flex items-center gap-2 p-3 rounded-xl mb-2" style={{ background: config.bg }}>
-                    <span className="text-lg">{config.emoji}</span>
-                    <span className="text-sm font-semibold" style={{ color: config.color }}>
-                      {config.label} — {config.marca}
-                    </span>
+                    
                   </div>
                 )}
                 <div className="grid sm:grid-cols-2 gap-4">
@@ -256,10 +253,7 @@ export default function FormCotizacion() {
               <div className="space-y-4">
                 {config && (
                   <div className="flex items-center gap-2 p-3 rounded-xl mb-2" style={{ background: config.bg }}>
-                    <span className="text-lg">{config.emoji}</span>
-                    <span className="text-sm font-semibold" style={{ color: config.color }}>
-                      Contanos más sobre tu consulta de {config.label}
-                    </span>
+                   
                   </div>
                 )}
 
