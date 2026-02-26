@@ -1,61 +1,70 @@
 export default function Hero() {
   return (
     <section
-      className="gradient-hero min-h-screen flex flex-col justify-center pt-16 relative overflow-hidden"
-      aria-label="Agencia Integral La Segunda Patagones"
+      className="relative bg-gradient-to-r from-[#003049] via-[#002f45] to-[#002032] text-white overflow-hidden"
+      aria-label="COOP360 - Agencia Integral de la Cooperativa en Patagones"
     >
-      {/* Círculos decorativos */}
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full pointer-events-none"
-        style={{ background: "radial-gradient(circle, rgba(227,6,19,0.12) 0%, transparent 65%)", transform: "translate(25%, -25%)" }} />
-      <div className="absolute bottom-0 left-0 w-72 h-72 rounded-full pointer-events-none"
-        style={{ background: "radial-gradient(circle, rgba(255,255,255,0.06) 0%, transparent 70%)", transform: "translate(-30%, 30%)" }} />
-
-      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 py-20 sm:py-28">
-        <div className="max-w-2xl">
-          {/* Badges de marcas */}
-          <div className="flex flex-wrap gap-2 mb-6">
-            <span className="text-xs font-bold px-3 py-1 rounded-full text-white" style={{ background: "rgba(255,255,255,0.15)", border: "1px solid rgba(255,255,255,0.25)" }}>
-              🛡️ La Segunda Seguros
-            </span>
-            <span className="text-xs font-bold px-3 py-1 rounded-full text-white" style={{ background: "rgba(255,255,255,0.15)", border: "1px solid rgba(255,255,255,0.25)" }}>
-              💊 Avalian Prepaga
-            </span>
-            <span className="text-xs font-bold px-3 py-1 rounded-full text-white" style={{ background: "rgba(255,255,255,0.15)", border: "1px solid rgba(255,255,255,0.25)" }}>
-              ✈️ Coovaeco Viajes
-            </span>
+      <div className="max-w-7xl mx-auto px-6 lg:px-8 py-20 lg:py-32 grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+        
+        {/* Texto Izquierdo */}
+        <div className="space-y-6 max-w-xl">
+          {/* Badge institucional */}
+          <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur px-4 py-2 rounded-full text-sm text-white">
+            <span className="w-2 h-2 bg-green-400 rounded-full"></span>
+            Agencia de la Cooperativa
           </div>
 
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white leading-tight mb-5">
-            Tu agencia integral<br />
-            <span style={{ color: "#ffc8cb" }}>en Patagones</span>
+          <h1 className="text-4xl lg:text-5xl font-extrabold leading-tight">
+            COOP360 <br />
+            <span className="text-[#7FFFD4]">Tu visión integral</span>
           </h1>
-          <p className="text-lg sm:text-xl text-blue-100 mb-8 leading-relaxed max-w-xl">
-            Somos la agencia oficial de La Segunda, Avalian y Coovaeco. Seguros, medicina prepaga y viajes — todo en un solo lugar, con asesoramiento real.
+
+          <p className="text-lg text-[#e0ebf0]">
+            El espacio donde resolvés seguros, salud y servicios cooperativos 
+            en un mismo lugar, con acompañamiento en cada etapa de tu vida.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-3">
-            <a href="#cotizar" className="btn-primary text-base">Consultar sin cargo</a>
-            <a href="#servicios" className="btn-outline-white text-base">Ver servicios</a>
-          </div>
+          {/* Botones */}
+          <div className="flex flex-wrap gap-4">
+            <a
+              href="#servicios"
+              className="bg-[#7FFFD4] text-[#003049] font-semibold px-6 py-3 rounded-lg hover:opacity-90 transition"
+            >
+              Conocer servicios
+            </a>
 
-          {/* Trust */}
-          <div className="mt-10 flex flex-wrap gap-5 text-blue-100 text-sm">
-            {["Agencia oficial y certificada", "3 sucursales: Patagones, Villalonga y Stroeder", "Asesor humano, sin bots"].map((t, i) => (
-              <div key={i} className="flex items-center gap-2">
-                <svg className="w-4 h-4 text-green-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                </svg>
-                {t}
-              </div>
-            ))}
+            <a
+              href="#contacto"
+              className="border border-white text-white font-semibold px-6 py-3 rounded-lg hover:bg-white hover:text-[#003049] transition"
+            >
+              Hablar con un asesor
+            </a>
           </div>
         </div>
+
+        {/* Imagen Derecha */}
+        <div className="relative flex justify-center lg:justify-end">
+          <img
+            src="/logo-cooperativa.png"
+            alt="La Cooperativa de Patagones y Viedma"
+            className="w-96 opacity-15 rounded-2xl"
+          />
+        </div>
+
       </div>
 
-      {/* Wave */}
+      {/* Onda Footer */}
       <div className="absolute bottom-0 left-0 right-0 pointer-events-none">
-        <svg viewBox="0 0 1440 56" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full block">
-          <path d="M0 56L1440 56L1440 18C1200 56 960 0 720 18C480 36 240 0 0 18L0 56Z" fill="white" />
+        <svg
+          viewBox="0 0 1440 80"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          className="w-full"
+        >
+          <path
+            d="M0 80L1440 0V80H0Z"
+            fill="white"
+          />
         </svg>
       </div>
     </section>

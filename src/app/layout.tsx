@@ -2,19 +2,19 @@ import "./globals.css";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Agencia Integral La Segunda Patagones | Seguros, Prepaga y Viajes",
+  title: "Agencia Integral Coop 360 | Seguros, Prepaga y Viajes",
   description:
-    "Agencia oficial e integral de La Segunda Seguros, Avalian Prepaga y Coovaeco Viajes en Carmen de Patagones. Cotizá sin cargo. Asesoramiento personalizado. Sucursales en Villalonga y Stroeder.",
+    "Agencia oficial e integral de Coop 360 Seguros, Avalian Prepaga y Coovaeco Viajes en Carmen de Patagones. Cotizá sin cargo. Asesoramiento personalizado. Sucursales en Villalonga y Stroeder.",
   keywords:
-    "La Segunda Patagones, Avalian prepaga, Coovaeco viajes, seguros Patagones, medicina prepaga Patagones, seguro de auto, agencia integral La Segunda",
-  authors: [{ name: "Agencia Integral La Segunda Patagones" }],
+    "Coop 360 Patagones, Avalian prepaga, Coovaeco viajes, seguros Patagones, medicina prepaga Patagones, seguro de auto, agencia integral Coop 360",
+  authors: [{ name: "Agencia Integral Coop 360 Patagones" }],
   openGraph: {
-    title: "Agencia Integral La Segunda Patagones | Seguros, Prepaga y Viajes",
+    title: "Agencia Integral Coop 360 Patagones | Seguros, Prepaga y Viajes",
     description:
-      "Agencia oficial e integral de La Segunda, Avalian y Coovaeco. Cotizá sin cargo en Patagones.",
+      "Agencia oficial e integral de Coop 360, Avalian y Coovaeco. Cotizá sin cargo en Patagones.",
     type: "website",
     locale: "es_AR",
-    siteName: "Agencia Integral La Segunda Patagones",
+    siteName: "Agencia Integral Coop 360 Patagones",
   },
   robots: { index: true, follow: true },
 };
@@ -35,8 +35,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "InsuranceAgency",
-              name: "Agencia Integral La Segunda Patagones",
-              description: "Agencia oficial de La Segunda Seguros, Avalian Prepaga y Coovaeco Viajes.",
+              name: "Agencia Integral Coop 360 Patagones",
+              description: "Agencia oficial de Coop 360 Seguros, Avalian Prepaga y Coovaeco Viajes.",
               address: {
                 "@type": "PostalAddress",
                 streetAddress: "Dr. Baraja 312",

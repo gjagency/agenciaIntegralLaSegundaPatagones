@@ -5,7 +5,7 @@ export default function Navbar() {
         {/* Marca */}
         <div className="flex items-center gap-2 sm:gap-3 min-w-0">
           <div className="flex items-center flex-shrink-0">
-            <span className="text-lg sm:text-xl font-extrabold" style={{ color: "#003087" }}>LA SEGUNDA</span>
+            <span className="text-lg sm:text-xl font-extrabold" style={{ color: "#003087" }}>Coop 360</span>
             <span className="mx-1.5 text-gray-300 font-light hidden sm:inline">|</span>
             <span className="hidden sm:inline text-sm font-semibold" style={{ color: "#6b7280" }}>Patagones</span>
           </div>

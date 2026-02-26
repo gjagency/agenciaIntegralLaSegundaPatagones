@@ -5,14 +5,50 @@ export default function Footer() {
         <div className="grid sm:grid-cols-3 gap-8 mb-10">
           {/* Marca */}
           <div>
-            <p className="text-xl font-extrabold text-white mb-1">La Segunda Patagones</p>
+            <p className="text-xl font-extrabold text-white mb-1">Coop 360</p>
             <p className="text-xs text-blue-300 mb-4">Agencia Oficial e Integral</p>
             <div className="flex flex-wrap gap-1.5">
-              {["🛡️ La Segunda", "💊 Avalian", "✈️ Coovaeco"].map((s, i) => (
-                <span key={i} className="text-xs px-2 py-0.5 rounded-full text-blue-200"
-                  style={{ background: "rgba(255,255,255,0.08)" }}>{s}</span>
-              ))}
+  
+          
+
+            {/* AVALIAN CON IMAGEN */}
+            <div className="flex flex-col gap-2">
+  
+              <span
+                className="flex items-center justify-center px-3 py-1 rounded-full"
+                style={{ background: "rgba(255,255,255,0.08)" }}
+              >
+                <img
+                  src="/avalian.png"
+                  alt="Avalian"
+                  className="h-8 w-auto object-contain"
+                />
+              </span>
+
+              <span
+                className="flex items-center justify-center px-3 py-1 rounded-full"
+                style={{ background: "rgba(255,255,255,0.08)" }}
+              >
+                <img
+                  src="/avalian.png"
+                  alt="Avalian"
+                  className="h-8 w-auto object-contain"
+                />
+              </span>
+              <span
+              className="flex items-center justify-center px-3 py-1 rounded-full shadow-sm"
+              style={{ background: "#ffffff" }}
+            >
+              <img
+                src="/coovaeco.png"
+                alt="Coovaeco"
+                className="h-8 w-auto object-contain"
+              />
+            </span>
+
             </div>
+
+          </div>
           </div>
 
           {/* Contacto */}
@@ -38,9 +74,19 @@ export default function Footer() {
 
         <div className="border-t pt-6 flex flex-col sm:flex-row items-center justify-between gap-2"
           style={{ borderColor: "rgba(255,255,255,0.08)" }}>
-          <p className="text-xs text-blue-400">© {new Date().getFullYear()} Agencia Integral La Segunda Patagones. Todos los derechos reservados.</p>
-          <p className="text-xs text-blue-500">Agencia oficial de La Segunda Seguros · Avalian · Coovaeco</p>
+          <p className="text-xs text-blue-400">© {new Date().getFullYear()} Agencia Integral Coop 360 Patagones. Todos los derechos reservados.</p>
+          <p className="text-xs text-blue-500">Agencia oficial de Coop 360 Seguros · Avalian · Coovaeco</p>
         </div>
+        <div className="mt-10 text-right">
+  <a
+    href="https://www.gj.agency/"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="text-xs text-gray-200 hover:text-white transition-colors duration-300"
+  >
+     Desarrollado por — © 2026 G&amp;J Agency.
+  </a>
+</div>
       </div>
     </footer>
   );

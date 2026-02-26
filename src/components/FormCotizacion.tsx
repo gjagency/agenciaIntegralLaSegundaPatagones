@@ -24,15 +24,15 @@ interface FormData {
 const servicioConfig = {
   seguros: {
     label: "Seguros",
-    emoji: "🛡️",
-    marca: "La Segunda",
+    logo: "/avalian.png", 
+    marca: "Coop 360",
     color: "#003087",
     bg: "rgba(0,48,135,0.08)",
     border: "#003087",
   },
   prepaga: {
     label: "Medicina Prepaga",
-    emoji: "💊",
+    logo: "/avalian.png", 
     marca: "Avalian",
     color: "#e30613",
     bg: "rgba(227,6,19,0.08)",
@@ -40,7 +40,7 @@ const servicioConfig = {
   },
   viajes: {
     label: "Viajes y Turismo",
-    emoji: "✈️",
+    logo: "/coovaeco.png", 
     marca: "Coovaeco",
     color: "#059669",
     bg: "rgba(5,150,105,0.08)",
@@ -93,7 +93,7 @@ export default function FormCotizacion() {
             </svg>
           </div>
           <h2 className="text-2xl font-extrabold mb-3" style={{ color: "#001f5a" }}>¡Consulta recibida!</h2>
-          <p className="text-gray-500">Un asesor de la Agencia La Segunda Patagones te contactará a la brevedad para brindarte el mejor asesoramiento.</p>
+          <p className="text-gray-500">Un asesor de la Agencia Coop 360 Patagones te contactará a la brevedad para brindarte el mejor asesoramiento.</p>
           <p className="mt-4 text-sm text-gray-400">También podés llamarnos: <a href="tel:02920475999" className="font-semibold" style={{ color: "#003087" }}>02920-475999</a></p>
         </div>
       </section>
@@ -101,6 +101,7 @@ export default function FormCotizacion() {
   }
 
   return (
+    <>
     <section id="cotizar" className="py-20 px-4 sm:px-6 relative overflow-hidden"
       style={{ background: "linear-gradient(135deg, #f5f7fa 0%, #eef1f8 100%)" }}>
       <div className="absolute top-0 right-0 w-64 h-64 rounded-full opacity-20 pointer-events-none"
@@ -168,8 +169,17 @@ export default function FormCotizacion() {
                         background: form.servicio === key ? cfg.bg : "white",
                       }}
                     >
-                      <span className="text-2xl">{cfg.emoji}</span>
-                      <div className="flex-1">
+                      {cfg.logo ? (
+                        <span className="flex items-center justify-center w-56 h-26 bg-white rounded-xl shadow-sm cursor-pointer">                        <img
+                            src={cfg.logo}
+                            alt={cfg.label}
+                            className="h-18 w-auto object-contain"
+                            />
+                        </span>
+                      ) : (
+                        <span className="text-2xl">{cfg.emoji}</span>
+                      )}
+                      <div className="flex-1" cursor-pointer>
                         <p className="font-bold text-sm" style={{ color: "#0f172a" }}>{cfg.label}</p>
                         <p className="text-xs text-gray-400">{cfg.marca}</p>
                       </div>
@@ -375,31 +385,79 @@ export default function FormCotizacion() {
         </div>
 
         {/* Contacto directo debajo del form */}
-        <div className="mt-6 grid sm:grid-cols-2 gap-3">
-          <a href="tel:02920475999"
-            className="flex items-center gap-3 bg-white rounded-xl p-4 border border-gray-100 hover:shadow-md transition-shadow">
-            <div className="w-9 h-9 rounded-lg flex items-center justify-center" style={{ background: "rgba(0,48,135,0.08)" }}>
-              <svg className="w-5 h-5" style={{ color: "#003087" }} fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-              </svg>
+       
+      </div>
+    </section>
+        <UbicacionSection />
+        </>
+      
+  );
+}
+function UbicacionSection() {
+  return (
+    <section className="py-24 bg-white relative overflow-hidden">
+      <div className="max-w-6xl mx-auto px-6">
+
+        <h3 className="text-3xl font-bold text-center mb-16 text-[#0f172a]">
+          Nuestra ubicación
+        </h3>
+
+        <div className="grid md:grid-cols-2 gap-14 items-center">
+
+          {/* INFO */}
+          <div>
+            <h4 className="text-xl font-semibold mb-4 text-[#003087]">
+              Agencia Integral Coop 360
+            </h4>
+
+            <p className="text-gray-600 mb-6 leading-relaxed">
+              Dr. Baraja 312 <br />
+              Carmen de Patagones <br />
+              Provincia de Buenos Aires
+            </p>
+
+            <a
+              href="https://www.google.com/maps/dir/?api=1&destination=Dr+Baraja+312+Carmen+de+Patagones"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-semibold text-sm shadow-md transition-all hover:scale-105 hover:shadow-xl"
+              style={{ background: "#003087", color: "white" }}
+            >
+              🧭 Cómo llegar con GPS
+            </a>
+          </div>
+
+          {/* MAPA */}
+          <div className="relative group">
+
+            <div
+              className="absolute inset-0 rounded-3xl blur-xl opacity-20 group-hover:opacity-30 transition"
+              style={{ background: "#003087" }}
+            />
+
+            <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-gray-100">
+
+              <iframe
+                src="https://www.google.com/maps?q=Dr.+Baraja+312,+Carmen+de+Patagones,+Buenos+Aires&output=embed"
+                width="100%"
+                height="420"
+                style={{ border: 0 }}
+                loading="lazy"
+              />
+
+              <a
+                href="https://www.google.com/maps/dir/?api=1&destination=Dr+Baraja+312+Carmen+de+Patagones"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="absolute bottom-5 right-5 bg-white px-5 py-2.5 rounded-full shadow-lg text-sm font-semibold hover:scale-105 transition-all"
+                style={{ color: "#003087" }}
+              >
+                📍 Abrir en Google Maps
+              </a>
+
             </div>
-            <div>
-              <p className="text-xs text-gray-400">Llamanos directamente</p>
-              <p className="text-sm font-bold" style={{ color: "#003087" }}>02920-475999</p>
-            </div>
-          </a>
-          <a href="mailto:seguropatagones@lasegunda.com.ar"
-            className="flex items-center gap-3 bg-white rounded-xl p-4 border border-gray-100 hover:shadow-md transition-shadow">
-            <div className="w-9 h-9 rounded-lg flex items-center justify-center" style={{ background: "rgba(0,48,135,0.08)" }}>
-              <svg className="w-5 h-5" style={{ color: "#003087" }} fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-              </svg>
-            </div>
-            <div>
-              <p className="text-xs text-gray-400">Mail</p>
-              <p className="text-sm font-bold truncate" style={{ color: "#003087" }}>seguropatagones@<br className="sm:hidden"/>lasegunda.com.ar</p>
-            </div>
-          </a>
+          </div>
+
         </div>
       </div>
     </section>
