@@ -75,7 +75,6 @@ export default function Footer() {
         <div className="border-t pt-6 flex flex-col sm:flex-row items-center justify-between gap-2"
           style={{ borderColor: "rgba(255,255,255,0.08)" }}>
           <p className="text-xs text-blue-400">© {new Date().getFullYear()} Agencia Integral COOP360 Patagones. Todos los derechos reservados.</p>
-          <p className="text-xs text-blue-500">Agencia oficial de COOP360 Seguros · Avalian · Coovaeco</p>
         </div>
         <div className="mt-10 text-right">
   <a
