@@ -23,19 +23,28 @@ interface FormData {
 
 const servicioConfig = {
   seguros: {
-    logo: "/laseg.svg", 
+    label: "Seguros",
+    marca: "La Segunda",
+    emoji: "🚗",
+    logo: "/laseg.svg",
     color: "#003087",
     bg: "rgba(0,48,135,0.08)",
     border: "#003087",
   },
   prepaga: {
-    logo: "/avalian.png", 
+    label: "Medicina Prepaga",
+    marca: "Avalian",
+    emoji: "🏥",
+    logo: "/avalian.png",
     color: "#e30613",
     bg: "rgba(227,6,19,0.08)",
     border: "#e30613",
   },
   viajes: {
-    logo: "/coovaeco.png", 
+    label: "Viajes",
+    marca: "Coovaeco",
+    emoji: "✈️",
+    logo: "/coovaeco.png",
     color: "#059669",
     bg: "rgba(5,150,105,0.08)",
     border: "#059669",
