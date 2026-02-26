@@ -1,7 +1,7 @@
 export default function Hero() {
   return (
     <section
-    className="relative bg-gradient-to-r from-[#E4F7EB] via-[#003087] to-[#003087] text-white overflow-hidden"      aria-label="COOP360 - Agencia Integral de la Cooperativa en Patagones"
+    className="relative bg-gradient-to-r from-[#E8FAEA] via-[#003087] to-[#003087] text-white overflow-hidden"      aria-label="COOP360 - Agencia Integral de la Cooperativa en Patagones"
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-8 py-20 lg:py-32 grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
         

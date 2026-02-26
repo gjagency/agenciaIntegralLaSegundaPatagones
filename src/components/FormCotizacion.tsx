@@ -23,28 +23,19 @@ interface FormData {
 
 const servicioConfig = {
   seguros: {
-    label: "Seguros",
-    marca: "La Segunda",
-    emoji: "🚗",
-    logo: "/laseg.svg",
+    logo: "/laseg.svg", 
     color: "#003087",
     bg: "rgba(0,48,135,0.08)",
     border: "#003087",
   },
   prepaga: {
-    label: "Medicina Prepaga",
-    marca: "Avalian",
-    emoji: "🏥",
-    logo: "/avalian.png",
+    logo: "/avalian.png", 
     color: "#e30613",
     bg: "rgba(227,6,19,0.08)",
     border: "#e30613",
   },
   viajes: {
-    label: "Viajes",
-    marca: "Coovaeco",
-    emoji: "✈️",
-    logo: "/coovaeco.png",
+    logo: "/coovaeco.png", 
     color: "#059669",
     bg: "rgba(5,150,105,0.08)",
     border: "#059669",
@@ -123,30 +114,38 @@ export default function FormCotizacion() {
         <div className="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden">
           {/* Step indicator */}
           <div className="px-8 pt-8">
-            <div className="step-indicator">
-              {[1, 2, 3].map((n) => (
-                <>
-                  <div
-                    key={`dot-${n}`}
-                    className="step-dot"
-                    style={{
-                      background: step >= n ? (config?.color || "#003087") : "#f3f4f6",
-                      color: step >= n ? "white" : "#9ca3af",
-                    }}
-                  >
-                    {step > n ? (
-                      <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                      </svg>
-                    ) : n}
-                  </div>
-                  {n < 3 && (
-                    <div key={`line-${n}`} className={`step-line ${step > n ? "active" : ""}`}
-                      style={{ background: step > n ? (config?.color || "#003087") : "#e5e7eb" }} />
-                  )}
-                </>
-              ))}
-            </div>
+          <div className="step-indicator">
+  {[1, 2, 3].map((n) => (
+    <div key={n} className="flex items-center">
+      <div
+        className="step-dot"
+        style={{
+          background: step >= n ? (config?.color || "#003087") : "#f3f4f6",
+          color: step >= n ? "white" : "#9ca3af",
+        }}
+      >
+        {step > n ? (
+          <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+            <path
+              fillRule="evenodd"
+              d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+              clipRule="evenodd"
+            />
+          </svg>
+        ) : (
+          n
+        )}
+      </div>
+
+      {n < 3 && (
+        <div
+          className={`step-line ${step > n ? "active" : ""}`}
+          style={{ background: step > n ? (config?.color || "#003087") : "#e5e7eb" }}
+        />
+      )}
+    </div>
+  ))}
+</div>
             <p className="text-center text-xs text-gray-400 -mt-2 mb-6">
               {step === 1 && "Elegí el servicio"}
               {step === 2 && "Tus datos de contacto"}

@@ -5,7 +5,7 @@ export default function Footer() {
         <div className="grid sm:grid-cols-3 gap-8 mb-10">
           {/* Marca */}
           <div>
-            <p className="text-xl font-extrabold text-white mb-1">Coop 360</p>
+            <p className="text-xl font-extrabold text-white mb-1">COOP360</p>
             <p className="text-xs text-blue-300 mb-4">Agencia Oficial e Integral</p>
             <div className="flex flex-wrap gap-1.5">
   
@@ -74,8 +74,8 @@ export default function Footer() {
 
         <div className="border-t pt-6 flex flex-col sm:flex-row items-center justify-between gap-2"
           style={{ borderColor: "rgba(255,255,255,0.08)" }}>
-          <p className="text-xs text-blue-400">© {new Date().getFullYear()} Agencia Integral Coop 360 Patagones. Todos los derechos reservados.</p>
-          <p className="text-xs text-blue-500">Agencia oficial de Coop 360 Seguros · Avalian · Coovaeco</p>
+          <p className="text-xs text-blue-400">© {new Date().getFullYear()} Agencia Integral COOP360 Patagones. Todos los derechos reservados.</p>
+          <p className="text-xs text-blue-500">Agencia oficial de COOP360 Seguros · Avalian · Coovaeco</p>
         </div>
         <div className="mt-10 text-right">
   <a

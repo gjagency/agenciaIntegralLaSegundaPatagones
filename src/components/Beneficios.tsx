@@ -24,7 +24,7 @@ const beneficios = [
       </svg>
     ),
     titulo: "Respaldo cooperativo",
-    descripcion: "Más de 80 años de trayectoria de Coop 360 Cooperativa te respaldan en cada decisión.",
+    descripcion: "Más de 80 años de trayectoria de COOP360 Cooperativa te respaldan en cada decisión.",
   },
   {
     icon: (

@@ -1,12 +1,12 @@
 const servicios = [
   {
     logo: "/laseg.svg",
-    marca: "Coop 360",
+    marca: "COOP360",
     color: "#003087",
     bg: "rgba(0,48,135,0.07)",
     descripcion:
       "Auto, hogar, vida, accidentes personales y más. Más de 80 años de trayectoria con la cooperativa más confiable del país.",
-    productos: ["Seguro de auto", "Seguro del hogar", "Vida y AP", "Comercios y empresas"],
+    productos: ["Seguro de auto", "Seguro del hogar", "Vida y AP", "Comercios y empresas", "Y mucho mas!",],
   },
   {
     logo: "/avalian.png",
@@ -15,7 +15,7 @@ const servicios = [
     bg: "rgba(227,6,19,0.07)",
     descripcion:
       "Planes de salud para vos, tu familia y tu empresa. Red médica nacional, especialistas y cobertura integral.",
-    productos: ["Plan individual", "Plan familiar", "Plan empresas", "Adultos mayores"],
+    productos: ["Plan individual", "Plan familiar", "Plan empresas", "Adultos mayores", "Y mucho mas!",],
   },
   {
     logo: "/coovaeco.png",
@@ -24,7 +24,7 @@ const servicios = [
     bg: "rgba(5,150,105,0.07)",
     descripcion:
       "Paquetes turísticos, excursiones y viajes nacionales e internacionales. Organizamos tu próxima aventura.",
-    productos: ["Viajes nacionales", "Viajes internacionales", "Excursiones", "Grupos y empresas"],
+    productos: ["Viajes nacionales", "Viajes internacionales", "Excursiones", "Grupos y empresas", "Y mucho mas!",],
   },
 ];
 

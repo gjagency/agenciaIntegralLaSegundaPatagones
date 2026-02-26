@@ -2,23 +2,22 @@ import "./globals.css";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Agencia Integral Coop 360 | Seguros, Prepaga y Viajes",
+  title: "Agencia Integral COOP360 | Redes Sociales",
   description:
-    "Agencia oficial e integral de Coop 360 Seguros, Avalian Prepaga y Coovaeco Viajes en Carmen de Patagones. Cotizá sin cargo. Asesoramiento personalizado. Sucursales en Villalonga y Stroeder.",
+    "Agencia oficial e integral de COOP360. Gestión de redes sociales, contenidos digitales y estrategias para potenciar tu presencia online en Carmen de Patagones. Sucursales en Villalonga y Stroeder.",
   keywords:
-    "Coop 360 Patagones, Avalian prepaga, Coovaeco viajes, seguros Patagones, medicina prepaga Patagones, seguro de auto, agencia integral Coop 360",
-  authors: [{ name: "Agencia Integral Coop 360 Patagones" }],
+    "COOP360 Patagones, redes sociales, marketing digital, gestión de redes, contenidos digitales, agencia integral Patagones",
+  authors: [{ name: "Agencia Integral COOP360 Patagones" }],
   openGraph: {
-    title: "Agencia Integral Coop 360 Patagones | Seguros, Prepaga y Viajes",
+    title: "Agencia Integral COOP360 Patagones | Redes Sociales",
     description:
-      "Agencia oficial e integral de Coop 360, Avalian y Coovaeco. Cotizá sin cargo en Patagones.",
+      "Agencia oficial de COOP360 especializada en redes sociales y presencia digital en Patagones.",
     type: "website",
     locale: "es_AR",
-    siteName: "Agencia Integral Coop 360 Patagones",
+    siteName: "Agencia Integral COOP360 Patagones",
   },
   robots: { index: true, follow: true },
 };
-
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="es">
@@ -35,8 +34,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "InsuranceAgency",
-              name: "Agencia Integral Coop 360 Patagones",
-              description: "Agencia oficial de Coop 360 Seguros, Avalian Prepaga y Coovaeco Viajes.",
+              name: "Agencia Integral COOP360 Patagones",
+              description: "Agencia oficial de COOP360 Seguros, Avalian Prepaga y Coovaeco Viajes.",
               address: {
                 "@type": "PostalAddress",
                 streetAddress: "Dr. Baraja 312",
