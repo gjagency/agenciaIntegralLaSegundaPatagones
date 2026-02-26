@@ -23,25 +23,19 @@ interface FormData {
 
 const servicioConfig = {
   seguros: {
-    label: "Seguros",
-    logo: "/avalian.png", 
-    marca: "Coop 360",
+    logo: "/laseg.svg", 
     color: "#003087",
     bg: "rgba(0,48,135,0.08)",
     border: "#003087",
   },
   prepaga: {
-    label: "Medicina Prepaga",
     logo: "/avalian.png", 
-    marca: "Avalian",
     color: "#e30613",
     bg: "rgba(227,6,19,0.08)",
     border: "#e30613",
   },
   viajes: {
-    label: "Viajes y Turismo",
     logo: "/coovaeco.png", 
-    marca: "Coovaeco",
     color: "#059669",
     bg: "rgba(5,150,105,0.08)",
     border: "#059669",
@@ -160,33 +154,21 @@ export default function FormCotizacion() {
                 <div className="space-y-3">
                   {(Object.entries(servicioConfig) as [Servicio, typeof servicioConfig.seguros][]).map(([key, cfg]) => (
                     <button
-                      key={key}
-                      type="button"
-                      onClick={() => { set("servicio", key); setStep(2); }}
-                      className="w-full flex items-center gap-4 p-4 rounded-xl border-2 text-left transition-all"
-                      style={{
-                        borderColor: form.servicio === key ? cfg.color : "#e5e7eb",
-                        background: form.servicio === key ? cfg.bg : "white",
-                      }}
-                    >
-                      {cfg.logo ? (
-                        <span className="flex items-center justify-center w-56 h-26 bg-white rounded-xl shadow-sm cursor-pointer">                        <img
-                            src={cfg.logo}
-                            alt={cfg.label}
-                            className="h-18 w-auto object-contain"
-                            />
-                        </span>
-                      ) : (
-                        <span className="text-2xl">{cfg.emoji}</span>
-                      )}
-                      <div className="flex-1" cursor-pointer>
-                        <p className="font-bold text-sm" style={{ color: "#0f172a" }}>{cfg.label}</p>
-                        <p className="text-xs text-gray-400">{cfg.marca}</p>
-                      </div>
-                      <svg className="w-5 h-5 text-gray-300" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-                      </svg>
-                    </button>
+                    key={key}
+                    type="button"
+                    onClick={() => { set("servicio", key); setStep(2); }}
+                    className="w-full flex items-center justify-center p-8 rounded-2xl border-2 transition-all hover:shadow-lg"
+                    style={{
+                      borderColor: form.servicio === key ? cfg.color : "#e5e7eb",
+                      background: form.servicio === key ? cfg.bg : "white",
+                    }}
+                  >
+                    <img
+                      src={cfg.logo}
+                      alt={key}
+                      className="h-20 w-auto object-contain"
+                    />
+                  </button>
                   ))}
                 </div>
               </div>
@@ -398,23 +380,16 @@ function UbicacionSection() {
     <section className="py-24 bg-white relative overflow-hidden">
       <div className="max-w-6xl mx-auto px-6">
 
-        <h3 className="text-3xl font-bold text-center mb-16 text-[#0f172a]">
-          Nuestra ubicación
-        </h3>
+      <h2 className="section-title">Ubicanos</h2>
 
-        <div className="grid md:grid-cols-2 gap-14 items-center">
 
-          {/* INFO */}
+        <div className="grid md:grid-cols-2 gap-16 items-start">
+
+          {/* INFO PRINCIPAL */}
           <div>
-            <h4 className="text-xl font-semibold mb-4 text-[#003087]">
-              Agencia Integral Coop 360
+            <h4 className="text-xl font-semibold mb-6 text-[#003087]">
+              Nuestras sucursales
             </h4>
-
-            <p className="text-gray-600 mb-6 leading-relaxed">
-              Dr. Baraja 312 <br />
-              Carmen de Patagones <br />
-              Provincia de Buenos Aires
-            </p>
 
             <a
               href="https://www.google.com/maps/dir/?api=1&destination=Dr+Baraja+312+Carmen+de+Patagones"
@@ -425,18 +400,63 @@ function UbicacionSection() {
             >
               🧭 Cómo llegar con GPS
             </a>
+
+            {/* SUCURSALES */}
+            <div className="mt-12 space-y-4">
+              {[
+                { nombre: "Patagones (Central)", dir: "Dr. Baraja 312", tel: "02920-475999" },
+                { nombre: "Villalonga", dir: "Sucursal Villalonga", tel: "Consultá por WhatsApp" },
+                { nombre: "Stroeder", dir: "Sucursal Stroeder", tel: "Consultá por WhatsApp" },
+              ].map((s, i) => (
+                <div
+                  key={i}
+                  className="bg-gray-50 rounded-xl p-5 border border-gray-100 flex items-start gap-3"
+                >
+                  <div
+                    className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5"
+                    style={{ background: "rgba(0,48,135,0.08)" }}
+                  >
+                    <svg
+                      className="w-4 h-4"
+                      style={{ color: "#003087" }}
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth={2}
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                      />
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                      />
+                    </svg>
+                  </div>
+
+                  <div>
+                    <p className="font-bold text-sm text-[#001f5a]">
+                      {s.nombre}
+                    </p>
+                    <p className="text-xs text-gray-500 mt-0.5">{s.dir}</p>
+                    <p className="text-xs text-gray-400 mt-0.5">{s.tel}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
 
           {/* MAPA */}
           <div className="relative group">
-
             <div
               className="absolute inset-0 rounded-3xl blur-xl opacity-20 group-hover:opacity-30 transition"
               style={{ background: "#003087" }}
             />
 
             <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-gray-100">
-
               <iframe
                 src="https://www.google.com/maps?q=Dr.+Baraja+312,+Carmen+de+Patagones,+Buenos+Aires&output=embed"
                 width="100%"
@@ -454,7 +474,6 @@ function UbicacionSection() {
               >
                 📍 Abrir en Google Maps
               </a>
-
             </div>
           </div>
 

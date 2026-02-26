@@ -1,8 +1,7 @@
 export default function Hero() {
   return (
     <section
-      className="relative bg-gradient-to-r from-[#003049] via-[#002f45] to-[#002032] text-white overflow-hidden"
-      aria-label="COOP360 - Agencia Integral de la Cooperativa en Patagones"
+    className="relative bg-gradient-to-r from-[#E4F7EB] via-[#003087] to-[#003087] text-white overflow-hidden"      aria-label="COOP360 - Agencia Integral de la Cooperativa en Patagones"
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-8 py-20 lg:py-32 grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
         
@@ -16,7 +15,7 @@ export default function Hero() {
 
           <h1 className="text-4xl lg:text-5xl font-extrabold leading-tight">
             COOP360 <br />
-            <span className="text-[#7FFFD4]">Tu visión integral</span>
+            <span className="text-[#7FF]">Tu visión integral</span>
           </h1>
 
           <p className="text-lg text-[#e0ebf0]">
@@ -45,7 +44,7 @@ export default function Hero() {
         {/* Imagen Derecha */}
         <div className="relative flex justify-center lg:justify-end">
           <img
-            src="/logo-cooperativa.png"
+            src="/logo.png"
             alt="La Cooperativa de Patagones y Viedma"
             className="w-96 opacity-15 rounded-2xl"
           />

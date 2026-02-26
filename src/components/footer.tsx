@@ -19,7 +19,7 @@ export default function Footer() {
                 style={{ background: "rgba(255,255,255,0.08)" }}
               >
                 <img
-                  src="/avalian.png"
+                  src="/laseg.svg"
                   alt="Avalian"
                   className="h-8 w-auto object-contain"
                 />
