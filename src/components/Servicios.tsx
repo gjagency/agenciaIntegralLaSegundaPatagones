@@ -34,7 +34,7 @@ export default function Servicios() {
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-14">
           <div className="badge">Agencia Integral</div>
-          <h2 className="section-title">Seguros, salud y viajes. Todo en un mismo lugar.</h2>          <p className="text-gray-500 mt-4 max-w-xl mx-auto">
+          <h2 className="section-title">Seguros, salud y viajes</h2>          <p className="text-gray-500 mt-4 max-w-xl mx-auto">
           Somos tu agencia oficial y certificada de confianza. Te acompañamos con asesoramiento personalizado en Patagones, Villalonga y Stroeder.
           </p>
         </div>
