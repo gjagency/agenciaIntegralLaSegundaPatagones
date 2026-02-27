@@ -7,9 +7,9 @@ import {
   Stethoscope,
   Plane,
   ArrowRight,
-  LucideIcon,
 } from "lucide-react";
 
+import type { LucideIcon } from "lucide-react";
 export default function Hero() {
   return (
     <section
