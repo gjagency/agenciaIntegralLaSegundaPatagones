@@ -11,7 +11,7 @@ export default function Hero() {
           alt="Agencia integral de servicios"
           className="w-full h-full object-cover scale-105"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#003087]/95 via-[#003087]/85 to-[#001d4f]/95"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-[#DAF0DA]/95 via-[#003087]/85 to-[#001d4f]/95"></div>
       </div>
 
       {/* Contenido */}
@@ -23,7 +23,7 @@ export default function Hero() {
           {/* Badge */}
           <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full text-sm">
             <span className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></span>
-            Agencia Integral Cooperativa
+            COOP360 Agencia Integral
           </div>
 
           <h1 className="text-4xl lg:text-5xl font-extrabold leading-tight">
