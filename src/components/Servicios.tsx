@@ -30,7 +30,7 @@ const servicios = [
 
 export default function Servicios() {
   return (
-    <section id="servicios" className="py-20 px-4 sm:px-6" style={{ background: "#f5f7fa" }} aria-label="Nuestros servicios">
+    <section id="servicios" className="py-20 px-4 sm:px-6" style={{ background: "#F0F7F0Nuestras sucursales" }} aria-label="Nuestros servicios">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-14">
           <div className="badge">Agencia Integral</div>
