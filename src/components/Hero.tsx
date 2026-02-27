@@ -11,7 +11,7 @@ export default function Hero() {
           alt="Agencia integral de servicios"
           className="w-full h-full object-cover scale-105"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#DAF0DA]/95 via-[#003087]/85 to-[#001d4f]/95"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-[#003087]/95 via-[#003087]/85 to-[#001d4f]/95"></div>
       </div>
 
       {/* Contenido */}
