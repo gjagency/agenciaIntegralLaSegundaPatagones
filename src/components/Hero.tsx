@@ -13,15 +13,15 @@ import type { LucideIcon } from "lucide-react";
 export default function Hero() {
   return (
     <section
-      className="relative min-h-[75vh] flex items-center overflow-hidden bg-[#001a45] font-['Plus_Jakarta_Sans',sans-serif]"
+      className="relative min-h-[65vh] flex items-center overflow-hidden bg-[#ccc] font-['Plus_Jakarta_Sans',sans-serif]"
       aria-label="COOP360 - Agencia Integral"
     >
       {/* Fondo */}
       <div className="absolute inset-0 z-0">
         <img
-          src="https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=1600"
+          src="https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=1600"
           alt="Agencia integral"
-          className="w-full h-full object-cover object-right-top opacity-60"
+          className="w-full h-full object-cover  opacity-100"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-[#002870] via-[#003087]/90 to-transparent" />
       </div>
@@ -41,7 +41,7 @@ export default function Hero() {
                 <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-400" />
               </span>
               <span className="text-xs font-bold tracking-wider text-emerald-50 uppercase">
-                COOP360 Agencia Integral
+                integral de servicios
               </span>
             </div>
 
@@ -61,55 +61,61 @@ export default function Hero() {
             <div className="flex flex-col sm:flex-row gap-4">
               <a
                 href="#servicios"
-                className="group flex items-center justify-center gap-3 bg-emerald-400 text-[#002870] font-bold px-8 py-4 rounded-full transition-all hover:scale-105 hover:bg-emerald-300"
+                className="group flex items-center justify-center gap-3 bg-emerald-400 text-[#024702] font-bold px-8 py-4 rounded-full transition-all hover:scale-105 hover:bg-emerald-300"
               >
                 Ver servicios
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </a>
 
               <a
-                href="#contacto"
+                href="#quienes-somos"
                 className="flex items-center justify-center px-8 py-4 rounded-full border border-white/30 text-white font-semibold hover:bg-white/10 transition-all"
               >
-                Asesoramiento
+                Quienes somos
               </a>
             </div>
           </motion.div>
 
-          {/* DERECHA */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.3, duration: 0.8 }}
-            className="hidden lg:grid grid-cols-2 gap-4"
-          >
-            <div className="space-y-4 translate-y-8">
-              <FeatureCard
-                icon={Stethoscope}
-                title="Prepaga"
-                desc="Cobertura médica completa."
-              />
-              <FeatureCard
-                icon={Plane}
-                title="Turismo"
-                desc="Viajes sin preocupaciones."
-              />
-            </div>
 
-            <div className="space-y-4">
-              <FeatureCard
-                icon={ShieldCheck}
-                title="Seguros"
-                desc="Protección para tu familia."
-              />
-              <div className="p-6 rounded-3xl bg-[#003087]/80 backdrop-blur-xl border border-white/10 flex flex-col items-center justify-center text-center h-full min-h-[180px]">
-                <span className="text-4xl font-black text-white">+15k</span>
-                <span className="text-blue-200 text-sm">
-                  Socios confían en nosotros
-                </span>
-              </div>
-            </div>
-          </motion.div>
+          {/* DERECHA */}
+<motion.div
+  initial={{ opacity: 0, x: 30 }}
+  animate={{ opacity: 1, x: 0 }}
+  transition={{ delay: 0.3, duration: 0.8 }}
+  className="hidden lg:flex justify-end"
+>
+  <div className="grid grid-cols-2 gap-6 max-w-md">
+    
+    <div className="space-y-6">
+      <FeatureCard
+        icon={Stethoscope}
+        title="Prepaga"
+        desc="Cobertura médica completa."
+      />
+      <FeatureCard
+        icon={Plane}
+        title="Turismo"
+        desc="Viajes sin preocupaciones."
+      />
+    </div>
+
+    <div className="space-y-6 pt-12">
+      <FeatureCard
+        icon={ShieldCheck}
+        title="Seguros"
+        desc="Protección para tu familia."
+      />
+
+      <div className="p-16 rounded-3xl bg-white/10 backdrop-blur-xl border border-white/20 flex flex-col items-center justify-center text-center shadow-xl">
+        <span className="text-4xl font-black text-white">+35</span>
+        <span className="text-blue-100 text-sm">
+          Años acompañando a la comarca
+        </span>
+      </div>
+    </div>
+
+  </div>
+</motion.div>
         </div>
       </div>
     </section>

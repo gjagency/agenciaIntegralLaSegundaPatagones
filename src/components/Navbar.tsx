@@ -1,15 +1,20 @@
 export default function Navbar() {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white/96 backdrop-blur-sm border-b border-gray-100 shadow-sm">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 h-30 flex items-center justify-between gap-4">
 
         {/* Marca */}
         <div className="flex items-center gap-3 min-w-0">
           <div className="flex items-center flex-shrink-0">
-            <span className="text-lg sm:text-xl font-extrabold" style={{ color: "#003087" }}>
-              COOP360
-            </span>
-            <span className="mx-1.5 text-gray-300 font-light hidden sm:inline">|</span>
+          <img
+          src="/c360.png"
+          alt="COOP360"
+          draggable={false}
+          className="h-30 w-auto object-contain select-none pointer-events-none"
+        />
+
+            <span className="mx-2 text-gray-300 font-light hidden sm:inline">|</span>
+
             <span className="hidden sm:inline text-sm font-semibold" style={{ color: "#6b7280" }}>
               Patagones
             </span>
@@ -18,7 +23,7 @@ export default function Navbar() {
           {/* Redes sociales */}
           <div className="hidden md:flex items-center gap-2 ml-2">
             <a
-              href="https://www.instagram.com/la_segundasegurospatagones?utm_source=qr&igsh=MTAxdWR0dTVsOGtnMA=="
+              href="https://www.instagram.com/reel/DUTcqhygDqD/"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Instagram"

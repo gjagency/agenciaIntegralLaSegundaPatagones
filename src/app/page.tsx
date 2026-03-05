@@ -11,9 +11,9 @@ export default function Home() {
     <>
       <Navbar />
       <main>
-        <Hero />
-        <QuienesSomos />
+        <Hero />        
         <Servicios />
+        <QuienesSomos />
         <FormCotizacion />
       </main>
       <Footer />
