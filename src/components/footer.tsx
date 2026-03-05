@@ -62,20 +62,46 @@ export default function Footer() {
           </div>
 
           {/* Sucursales */}
-          <div>
-            <p className="text-xs font-bold tracking-widest uppercase text-blue-400 mb-3">Sucursales</p>
-            <div className="space-y-1.5 text-sm text-blue-200">
-              <p>Carmen de Patagones (Central)</p>
-              <p>Villalonga</p>
-              <p>Stroeder</p>
-            </div>
-          </div>
-        </div>
+<div className="flex items-start justify-between gap-6">
 
+{/* Texto sucursales */}
+<div>
+  <p className="text-xs font-bold tracking-widest uppercase text-blue-400 mb-3">
+    Sucursales
+  </p>
+  <div className="space-y-1.5 text-sm text-blue-200">
+    <p>Carmen de Patagones (Central)</p>
+    <p>Villalonga</p>
+    <p>Stroeder</p>
+  </div>
+</div>
+
+{/* Imagen al lado */}
+<a href="/" className="flex-shrink-0">
+  <div
+    className="p-3 rounded-lg"
+    style={{ background: "rgba(255,255,255,0.08)" }}
+  >
+    <img
+      src="/cooperativa.png"
+      alt="COOP360"
+      draggable={false}
+      className="h-20 w-auto object-contain select-none rounded-lg"
+    />
+  </div>
+</a>
+
+</div></div>
+
+
+
+  
         <div className="border-t pt-6 flex flex-col sm:flex-row items-center justify-between gap-2"
           style={{ borderColor: "rgba(255,255,255,0.08)" }}>
           <p className="text-xs text-blue-400">© {new Date().getFullYear()} Agencia Integral COOP360 Patagones. Todos los derechos reservados.</p>
+         
         </div>
+        
         <div className="mt-10 text-right">
   <a
     href="https://www.gj.agency/"

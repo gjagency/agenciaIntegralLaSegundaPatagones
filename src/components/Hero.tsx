@@ -61,7 +61,8 @@ export default function Hero() {
             <div className="flex flex-col sm:flex-row gap-4">
               <a
                 href="#servicios"
-                className="group flex items-center justify-center gap-3 bg-emerald-400 text-[#024702] font-bold px-8 py-4 rounded-full transition-all hover:scale-105 hover:bg-emerald-300"
+                className="flex items-center justify-center px-8 py-4 rounded-full border border-white/30 text-white font-semibold hover:bg-white/10 transition-all"
+
               >
                 Ver servicios
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -69,7 +70,7 @@ export default function Hero() {
 
               <a
                 href="#quienes-somos"
-                className="flex items-center justify-center px-8 py-4 rounded-full border border-white/30 text-white font-semibold hover:bg-white/10 transition-all"
+                className="group flex items-center justify-center gap-3 bg-emerald-400 text-[#024702] font-bold px-8 py-4 rounded-full transition-all hover:scale-105 hover:bg-emerald-300"
               >
                 Quienes somos
               </a>
