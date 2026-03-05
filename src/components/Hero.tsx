@@ -13,7 +13,7 @@ import type { LucideIcon } from "lucide-react";
 export default function Hero() {
   return (
     <section
-      className="relative min-h-[90vh] flex items-center overflow-hidden bg-[#001a45] font-['Plus_Jakarta_Sans',sans-serif]"
+      className="relative min-h-[75vh] flex items-center overflow-hidden bg-[#001a45] font-['Plus_Jakarta_Sans',sans-serif]"
       aria-label="COOP360 - Agencia Integral"
     >
       {/* Fondo */}
