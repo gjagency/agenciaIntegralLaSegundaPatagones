@@ -11,10 +11,12 @@ interface FormData {
   localidad: string;
   // Seguros
   tipoSeguro: string;
-  // Prepaga
+  // Prepaga (Avalian)
+  tipoCobertura: string; // "GRUPO FAMILIAR" | "INDIVIDUAL"
+  tienePrepaga: string;  // "Sí" | "No"
   cantPersonas: string;
   edadTitular: string;
-  // Viajes
+  // Viajes (Coovaeco)
   destinoViaje: string;
   cantViajeros: string;
   fechaAproximada: string;
@@ -23,31 +25,38 @@ interface FormData {
 
 const servicioConfig = {
   seguros: {
-    logo: "/laseg.svg", 
+    logo: "/laseg.svg",
     color: "#003087",
     bg: "rgba(0,48,135,0.08)",
     border: "#003087",
   },
   prepaga: {
-    logo: "/avalian.png", 
+    logo: "/avalian.png",
     color: "#e30613",
     bg: "rgba(227,6,19,0.08)",
     border: "#e30613",
   },
   viajes: {
-    logo: "/coovaeco.png", 
+    logo: "/coovaeco.png",
     color: "#059669",
     bg: "rgba(5,150,105,0.08)",
     border: "#059669",
   },
 };
 
-const TOTAL_STEPS = 3;
+const VIAJES_OPCIONES = [
+  { label: "Viaje Internacional", icon: "✈️" },
+  { label: "Viaje Nacional", icon: "🗺️" },
+  { label: "Viaje Empresarial", icon: "💼" },
+  { label: "Viaje Técnico", icon: "🔧" },
+  { label: "Crucero", icon: "🚢" },
+];
 
 export default function FormCotizacion() {
   const [step, setStep] = useState(1);
   const [enviado, setEnviado] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
   const [form, setForm] = useState<FormData>({
     servicio: "",
     nombre: "",
@@ -55,6 +64,8 @@ export default function FormCotizacion() {
     email: "",
     localidad: "",
     tipoSeguro: "",
+    tipoCobertura: "",
+    tienePrepaga: "",
     cantPersonas: "",
     edadTitular: "",
     destinoViaje: "",
@@ -68,27 +79,75 @@ export default function FormCotizacion() {
 
   const config = form.servicio ? servicioConfig[form.servicio] : null;
 
-  const handleEnviar = () => {
+  const handleEnviar = async () => {
     setLoading(true);
-    setTimeout(() => {
+    setErrorMsg("");
+    try {
+      const res = await fetch("/api/cotizacion", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      if (res.ok) {
+        setEnviado(true);
+      } else {
+        const data = await res.json();
+        setErrorMsg(data.error || "Error al enviar. Intentá de nuevo.");
+      }
+    } catch {
+      setErrorMsg("Error de conexión. Intentá de nuevo.");
+    } finally {
       setLoading(false);
-      setEnviado(true);
-    }, 1200);
+    }
   };
 
   if (enviado) {
     return (
-      <section id="cotizar" className="py-20 px-4 sm:px-6" style={{ background: "linear-gradient(135deg, #f5f7fa, #eef1f8)" }}>
+      <section
+        id="cotizar"
+        className="py-20 px-4 sm:px-6"
+        style={{ background: "linear-gradient(135deg, #f5f7fa, #eef1f8)" }}
+      >
         <div className="max-w-lg mx-auto text-center">
-          <div className="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6"
-            style={{ background: "rgba(0,48,135,0.08)" }}>
-            <svg className="w-10 h-10" style={{ color: "#003087" }} fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+          <div
+            className="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6"
+            style={{ background: "rgba(0,48,135,0.08)" }}
+          >
+            <svg
+              className="w-10 h-10"
+              style={{ color: "#003087" }}
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={2}
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M5 13l4 4L19 7"
+              />
             </svg>
           </div>
-          <h2 className="text-2xl font-extrabold mb-3" style={{ color: "#001f5a" }}>¡Consulta recibida!</h2>
-          <p className="text-gray-500">Un asesor de la Agencia Coop 360 Patagones te contactará a la brevedad para brindarte el mejor asesoramiento.</p>
-          <p className="mt-4 text-sm text-gray-400">También podés llamarnos: <a href="tel:02920475999" className="font-semibold" style={{ color: "#003087" }}>02920-475999</a></p>
+          <h2
+            className="text-2xl font-extrabold mb-3"
+            style={{ color: "#001f5a" }}
+          >
+            ¡Consulta recibida!
+          </h2>
+          <p className="text-gray-500">
+            Un asesor de la Agencia Coop 360 Patagones te contactará a la
+            brevedad para brindarte el mejor asesoramiento.
+          </p>
+          <p className="mt-4 text-sm text-gray-400">
+            También podés llamarnos:{" "}
+            <a
+              href="tel:02920475999"
+              className="font-semibold"
+              style={{ color: "#003087" }}
+            >
+              02920-475999
+            </a>
+          </p>
         </div>
       </section>
     );
@@ -96,298 +155,481 @@ export default function FormCotizacion() {
 
   return (
     <>
-    <section id="cotizar" className="py-20 px-4 sm:px-6 relative overflow-hidden"
-      style={{ background: "linear-gradient(135deg, #f5f7fa 0%, #eef1f8 100%)" }}>
-      <div className="absolute top-0 right-0 w-64 h-64 rounded-full opacity-20 pointer-events-none"
-        style={{ background: "radial-gradient(circle, #003087 0%, transparent 70%)", transform: "translate(30%,-30%)" }} />
-
-      <div className="max-w-xl mx-auto relative z-10">
-        {/* Header */}
-        <div className="text-center mb-10">
-          <div className="badge">Sin cargo · Sin compromiso</div>
-          <h2 className="section-title">Consultá con un asesor real</h2>
-          <p className="text-gray-500 mt-3 text-sm sm:text-base">
-            Completá el formulario y te contactamos hoy mismo. Agencia oficial en Dr. Baraja 312, Patagones.
-          </p>
-        </div>
-
-        <div className="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden">
-          {/* Step indicator */}
-          <div className="px-8 pt-8">
-          <div className="step-indicator">
-  {[1, 2, 3].map((n) => (
-    <div key={n} className="flex items-center">
-      <div
-        className="step-dot"
+      <section
+        id="cotizar"
+        className="py-20 px-4 sm:px-6 relative overflow-hidden"
         style={{
-          background: step >= n ? (config?.color || "#003087") : "#f3f4f6",
-          color: step >= n ? "white" : "#9ca3af",
+          background: "linear-gradient(135deg, #f5f7fa 0%, #eef1f8 100%)",
         }}
       >
-        {step > n ? (
-          <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-            <path
-              fillRule="evenodd"
-              d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-              clipRule="evenodd"
-            />
-          </svg>
-        ) : (
-          n
-        )}
-      </div>
-
-      {n < 3 && (
         <div
-          className={`step-line ${step > n ? "active" : ""}`}
-          style={{ background: step > n ? (config?.color || "#003087") : "#e5e7eb" }}
+          className="absolute top-0 right-0 w-64 h-64 rounded-full opacity-20 pointer-events-none"
+          style={{
+            background:
+              "radial-gradient(circle, #003087 0%, transparent 70%)",
+            transform: "translate(30%,-30%)",
+          }}
         />
-      )}
-    </div>
-  ))}
-</div>
-            <p className="text-center text-xs text-gray-400 -mt-2 mb-6">
-              {step === 1 && "Elegí el servicio"}
-              {step === 2 && "Tus datos de contacto"}
-              {step === 3 && "Detalle de tu consulta"}
+
+        <div className="max-w-xl mx-auto relative z-10">
+          {/* Header */}
+          <div className="text-center mb-10">
+            <div className="badge">Sin cargo · Sin compromiso</div>
+            <h2 className="section-title">Consultá con un asesor real</h2>
+            <p className="text-gray-500 mt-3 text-sm sm:text-base">
+              Completá el formulario y te contactamos hoy mismo. Agencia oficial
+              en Dr. Baraja 312, Patagones.
             </p>
           </div>
 
-          <div className="px-6 sm:px-8 pb-8">
-
-            {/* PASO 1 — Elegir servicio */}
-            {step === 1 && (
-              <div>
-                <p className="font-semibold text-sm mb-4" style={{ color: "#374151" }}>¿Qué servicio necesitás?</p>
-                <div className="space-y-3">
-                  {(Object.entries(servicioConfig) as [Servicio, typeof servicioConfig.seguros][]).map(([key, cfg]) => (
-                    <button
-                    key={key}
-                    type="button"
-                    onClick={() => { set("servicio", key); setStep(2); }}
-                    className="w-full flex items-center justify-center p-8 rounded-2xl border-2 transition-all hover:shadow-lg"
-                    style={{
-                      borderColor: form.servicio === key ? cfg.color : "#e5e7eb",
-                      background: form.servicio === key ? cfg.bg : "white",
-                    }}
-                  >
-                    <img
-                      src={cfg.logo}
-                      alt={key}
-                      className="h-20 w-auto object-contain"
-                    />
-                  </button>
-                  ))}
-                </div>
+          <div className="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden">
+            {/* Step indicator */}
+            <div className="px-8 pt-8">
+              <div className="step-indicator">
+                {[1, 2, 3].map((n) => (
+                  <div key={n} className="flex items-center">
+                    <div
+                      className="step-dot"
+                      style={{
+                        background:
+                          step >= n ? config?.color || "#003087" : "#f3f4f6",
+                        color: step >= n ? "white" : "#9ca3af",
+                      }}
+                    >
+                      {step > n ? (
+                        <svg
+                          className="w-4 h-4"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                      ) : (
+                        n
+                      )}
+                    </div>
+                    {n < 3 && (
+                      <div
+                        className={`step-line ${step > n ? "active" : ""}`}
+                        style={{
+                          background:
+                            step > n
+                              ? config?.color || "#003087"
+                              : "#e5e7eb",
+                        }}
+                      />
+                    )}
+                  </div>
+                ))}
               </div>
-            )}
+              <p className="text-center text-xs text-gray-400 -mt-2 mb-6">
+                {step === 1 && "Elegí el servicio"}
+                {step === 2 && "Tus datos de contacto"}
+                {step === 3 && "Detalle de tu consulta"}
+              </p>
+            </div>
 
-            {/* PASO 2 — Datos personales */}
-            {step === 2 && (
-              <div className="space-y-4">
-                {config && (
-                  <div className="flex items-center gap-2 p-3 rounded-xl mb-2" style={{ background: config.bg }}>
-                    
-                  </div>
-                )}
-                <div className="grid sm:grid-cols-2 gap-4">
-                  <div>
-                    <label className="form-label">Nombre y apellido *</label>
-                    <input
-                      type="text" required placeholder="Juan García"
-                      value={form.nombre} onChange={e => set("nombre", e.target.value)}
-                      className="form-input"
-                    />
-                  </div>
-                  <div>
-                    <label className="form-label">Teléfono / WhatsApp *</label>
-                    <input
-                      type="tel" required placeholder="02920-XXXXXX"
-                      value={form.telefono} onChange={e => set("telefono", e.target.value)}
-                      className="form-input"
-                    />
-                  </div>
-                </div>
+            <div className="px-6 sm:px-8 pb-8">
+              {/* ── PASO 1 — Elegir servicio ── */}
+              {step === 1 && (
                 <div>
-                  <label className="form-label">Correo electrónico</label>
-                  <input
-                    type="email" placeholder="tu@email.com"
-                    value={form.email} onChange={e => set("email", e.target.value)}
-                    className="form-input"
-                  />
-                </div>
-                <div>
-                  <label className="form-label">Localidad *</label>
-                  <select value={form.localidad} onChange={e => set("localidad", e.target.value)} className="form-input">
-                    <option value="">Seleccioná tu localidad</option>
-                    <option>Carmen de Patagones</option>
-                    <option>Viedma</option>
-                    <option>Villalonga</option>
-                    <option>Stroeder</option>
-                    <option>Otra localidad</option>
-                  </select>
-                </div>
-
-                <div className="flex gap-3 pt-2">
-                  <button type="button" onClick={() => setStep(1)} className="btn-outline-azul flex-1 text-sm" style={{ padding: "11px" }}>
-                    ← Atrás
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setStep(3)}
-                    disabled={!form.nombre || !form.telefono || !form.localidad}
-                    className="btn-primary flex-[2] text-sm"
-                    style={{
-                      padding: "11px",
-                      background: config ? `linear-gradient(135deg, ${config.color}, ${config.color}cc)` : undefined,
-                    }}
+                  <p
+                    className="font-semibold text-sm mb-4"
+                    style={{ color: "#374151" }}
                   >
-                    Continuar →
-                  </button>
+                    ¿Qué servicio necesitás?
+                  </p>
+                  <div className="space-y-3">
+                    {(
+                      Object.entries(
+                        servicioConfig
+                      ) as [Servicio, (typeof servicioConfig)[keyof typeof servicioConfig]][]
+                    ).map(([key, cfg]) => (
+                      <button
+                        key={key}
+                        type="button"
+                        onClick={() => {
+                          set("servicio", key);
+                          setStep(2);
+                        }}
+                        className="w-full flex items-center justify-center p-8 rounded-2xl border-2 transition-all hover:shadow-lg"
+                        style={{
+                          borderColor:
+                            form.servicio === key ? cfg.color : "#e5e7eb",
+                          background:
+                            form.servicio === key ? cfg.bg : "white",
+                        }}
+                      >
+                        <img
+                          src={cfg.logo}
+                          alt={key}
+                          className="h-20 w-auto object-contain"
+                        />
+                      </button>
+                    ))}
+                  </div>
                 </div>
-              </div>
-            )}
+              )}
 
-            {/* PASO 3 — Detalle específico */}
-            {step === 3 && (
-              <div className="space-y-4">
-                {config && (
-                  <div className="flex items-center gap-2 p-3 rounded-xl mb-2" style={{ background: config.bg }}>
-                   
-                  </div>
-                )}
-
-                {/* Seguros */}
-                {form.servicio === "seguros" && (
-                  <div>
-                    <label className="form-label">¿Qué tipo de seguro buscás?</label>
-                    <select value={form.tipoSeguro} onChange={e => set("tipoSeguro", e.target.value)} className="form-input">
-                      <option value="">Seleccioná...</option>
-                      <option>Seguro de auto</option>
-                      <option>Seguro del hogar</option>
-                      <option>Vida / Accidentes personales</option>
-                      <option>Comercio o empresa</option>
-                      <option>Otro / No sé cuál</option>
-                    </select>
-                  </div>
-                )}
-
-                {/* Prepaga */}
-                {form.servicio === "prepaga" && (
+              {/* ── PASO 2 — Datos personales ── */}
+              {step === 2 && (
+                <div className="space-y-4">
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="form-label">Edad del titular</label>
+                      <label className="form-label">Nombre y apellido *</label>
                       <input
-                        type="number" min={1} max={99} placeholder="Ej: 35"
-                        value={form.edadTitular} onChange={e => set("edadTitular", e.target.value)}
+                        type="text"
+                        required
+                        placeholder="Juan García"
+                        value={form.nombre}
+                        onChange={(e) => set("nombre", e.target.value)}
                         className="form-input"
                       />
                     </div>
                     <div>
-                      <label className="form-label">Cantidad de personas</label>
-                      <select value={form.cantPersonas} onChange={e => set("cantPersonas", e.target.value)} className="form-input">
-                        <option value="">Seleccioná...</option>
-                        <option>Solo yo (individual)</option>
-                        <option>2 personas</option>
-                        <option>3 a 4 personas</option>
-                        <option>5 o más personas</option>
-                        <option>Plan empresarial</option>
-                      </select>
+                      <label className="form-label">
+                        Teléfono / WhatsApp *
+                      </label>
+                      <input
+                        type="tel"
+                        required
+                        placeholder="02920-XXXXXX"
+                        value={form.telefono}
+                        onChange={(e) => set("telefono", e.target.value)}
+                        className="form-input"
+                      />
                     </div>
                   </div>
-                )}
+                  <div>
+                    <label className="form-label">Correo electrónico</label>
+                    <input
+                      type="email"
+                      placeholder="tu@email.com"
+                      value={form.email}
+                      onChange={(e) => set("email", e.target.value)}
+                      className="form-input"
+                    />
+                  </div>
+                  <div>
+                    <label className="form-label">Localidad *</label>
+                    <select
+                      value={form.localidad}
+                      onChange={(e) => set("localidad", e.target.value)}
+                      className="form-input"
+                    >
+                      <option value="">Seleccioná tu localidad</option>
+                      <option>Carmen de Patagones</option>
+                      <option>Viedma</option>
+                      <option>Villalonga</option>
+                      <option>Stroeder</option>
+                      <option>Otra localidad</option>
+                    </select>
+                  </div>
 
-                {/* Viajes */}
-                {form.servicio === "viajes" && (
-                  <div className="space-y-4">
+                  <div className="flex gap-3 pt-2">
+                    <button
+                      type="button"
+                      onClick={() => setStep(1)}
+                      className="btn-outline-azul flex-1 text-sm"
+                      style={{ padding: "11px" }}
+                    >
+                      ← Atrás
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setStep(3)}
+                      disabled={
+                        !form.nombre || !form.telefono || !form.localidad
+                      }
+                      className="btn-primary flex-[2] text-sm"
+                      style={{
+                        padding: "11px",
+                        background: config
+                          ? `linear-gradient(135deg, ${config.color}, ${config.color}cc)`
+                          : undefined,
+                      }}
+                    >
+                      Continuar →
+                    </button>
+                  </div>
+                </div>
+              )}
+
+              {/* ── PASO 3 — Detalle específico ── */}
+              {step === 3 && (
+                <div className="space-y-5">
+                  {/* ── SEGUROS (La Segunda) ── */}
+                  {form.servicio === "seguros" && (
                     <div>
-                      <label className="form-label">Destino o tipo de viaje</label>
-                      <select value={form.destinoViaje} onChange={e => set("destinoViaje", e.target.value)} className="form-input">
+                      <label className="form-label">
+                        ¿Qué tipo de seguro buscás?
+                      </label>
+                      <select
+                        value={form.tipoSeguro}
+                        onChange={(e) => set("tipoSeguro", e.target.value)}
+                        className="form-input"
+                      >
                         <option value="">Seleccioná...</option>
-                        <option>Nacional (Argentina)</option>
-                        <option>Internacional</option>
-                        <option>Excursión / día de campo</option>
-                        <option>Viaje grupal / empresa</option>
-                        <option>No sé, quiero opciones</option>
+                        <option>Seguro de auto</option>
+                        <option>Seguro del hogar</option>
+                        <option>Vida / Accidentes personales</option>
+                        <option>Comercio o empresa</option>
+                        <option>Otro / No sé cuál</option>
                       </select>
                     </div>
-                    <div className="grid sm:grid-cols-2 gap-4">
+                  )}
+
+                  {/* ── PREPAGA (Avalian) ── */}
+                  {form.servicio === "prepaga" && (
+                    <>
+                      {/* Tipo de cobertura */}
                       <div>
-                        <label className="form-label">Cantidad de viajeros</label>
-                        <input
-                          type="number" min={1} placeholder="Ej: 2"
-                          value={form.cantViajeros} onChange={e => set("cantViajeros", e.target.value)}
-                          className="form-input"
-                        />
+                        <label className="form-label mb-3 block">
+                          ¿Qué tipo de cobertura necesitás?
+                        </label>
+                        <div className="grid grid-cols-2 gap-3">
+                          {["GRUPO FAMILIAR", "INDIVIDUAL"].map((opcion) => (
+                            <button
+                              key={opcion}
+                              type="button"
+                              onClick={() => set("tipoCobertura", opcion)}
+                              className="flex flex-col items-center justify-center gap-2 p-5 rounded-2xl border-2 transition-all hover:shadow-md font-semibold text-sm"
+                              style={{
+                                borderColor:
+                                  form.tipoCobertura === opcion
+                                    ? "#e30613"
+                                    : "#e5e7eb",
+                                background:
+                                  form.tipoCobertura === opcion
+                                    ? "rgba(227,6,19,0.07)"
+                                    : "white",
+                                color:
+                                  form.tipoCobertura === opcion
+                                    ? "#e30613"
+                                    : "#374151",
+                              }}
+                            >
+                              <span className="text-2xl">
+                                {opcion === "GRUPO FAMILIAR" ? "👨‍👩‍👧‍👦" : "👤"}
+                              </span>
+                              {opcion}
+                            </button>
+                          ))}
+                        </div>
                       </div>
+
+                      {/* ¿Ya tiene prepaga? */}
                       <div>
-                        <label className="form-label">Fecha aproximada</label>
-                        <input
-                          type="text" placeholder="Ej: Julio 2025"
-                          value={form.fechaAproximada} onChange={e => set("fechaAproximada", e.target.value)}
-                          className="form-input"
-                        />
+                        <label className="form-label mb-3 block">
+                          ¿Ya contás con prepaga?
+                        </label>
+                        <div className="flex gap-3">
+                          {["Sí", "No"].map((op) => (
+                            <button
+                              key={op}
+                              type="button"
+                              onClick={() => set("tienePrepaga", op)}
+                              className="flex-1 py-3 rounded-xl border-2 font-semibold text-sm transition-all hover:shadow-md"
+                              style={{
+                                borderColor:
+                                  form.tienePrepaga === op
+                                    ? "#e30613"
+                                    : "#e5e7eb",
+                                background:
+                                  form.tienePrepaga === op
+                                    ? "rgba(227,6,19,0.07)"
+                                    : "white",
+                                color:
+                                  form.tienePrepaga === op
+                                    ? "#e30613"
+                                    : "#374151",
+                              }}
+                            >
+                              {op === "Sí" ? "✅ Sí" : "❌ No"}
+                            </button>
+                          ))}
+                        </div>
                       </div>
-                    </div>
+
+                      {/* Campos adicionales */}
+                      <div className="grid sm:grid-cols-2 gap-4">
+                        <div>
+                          <label className="form-label">Edad del titular</label>
+                          <input
+                            type="number"
+                            min={1}
+                            max={99}
+                            placeholder="Ej: 35"
+                            value={form.edadTitular}
+                            onChange={(e) =>
+                              set("edadTitular", e.target.value)
+                            }
+                            className="form-input"
+                          />
+                        </div>
+                        {form.tipoCobertura === "GRUPO FAMILIAR" && (
+                          <div>
+                            <label className="form-label">
+                              Cantidad de personas
+                            </label>
+                            <select
+                              value={form.cantPersonas}
+                              onChange={(e) =>
+                                set("cantPersonas", e.target.value)
+                              }
+                              className="form-input"
+                            >
+                              <option value="">Seleccioná...</option>
+                              <option>2 personas</option>
+                              <option>3 a 4 personas</option>
+                              <option>5 o más personas</option>
+                            </select>
+                          </div>
+                        )}
+                      </div>
+                    </>
+                  )}
+
+                  {/* ── VIAJES (Coovaeco) ── */}
+                  {form.servicio === "viajes" && (
+                    <>
+                      <div>
+                        <label className="form-label mb-3 block">
+                          ¿Qué tipo de viaje necesitás?
+                        </label>
+                        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                          {VIAJES_OPCIONES.map(({ label, icon }) => (
+                            <button
+                              key={label}
+                              type="button"
+                              onClick={() => set("destinoViaje", label)}
+                              className="flex flex-col items-center justify-center gap-2 p-4 rounded-2xl border-2 transition-all hover:shadow-md font-semibold text-xs text-center"
+                              style={{
+                                borderColor:
+                                  form.destinoViaje === label
+                                    ? "#059669"
+                                    : "#e5e7eb",
+                                background:
+                                  form.destinoViaje === label
+                                    ? "rgba(5,150,105,0.07)"
+                                    : "white",
+                                color:
+                                  form.destinoViaje === label
+                                    ? "#059669"
+                                    : "#374151",
+                              }}
+                            >
+                              <span className="text-2xl">{icon}</span>
+                              {label}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+
+                      <div className="grid sm:grid-cols-2 gap-4">
+                        <div>
+                          <label className="form-label">
+                            Cantidad de viajeros
+                          </label>
+                          <input
+                            type="number"
+                            min={1}
+                            placeholder="Ej: 2"
+                            value={form.cantViajeros}
+                            onChange={(e) =>
+                              set("cantViajeros", e.target.value)
+                            }
+                            className="form-input"
+                          />
+                        </div>
+                        <div>
+                          <label className="form-label">
+                            Fecha aproximada
+                          </label>
+                          <input
+                            type="text"
+                            placeholder="Ej: Julio 2025"
+                            value={form.fechaAproximada}
+                            onChange={(e) =>
+                              set("fechaAproximada", e.target.value)
+                            }
+                            className="form-input"
+                          />
+                        </div>
+                      </div>
+                    </>
+                  )}
+
+                  {/* Comentario */}
+                  <div>
+                    <label className="form-label">
+                      Comentario adicional (opcional)
+                    </label>
+                    <textarea
+                      rows={2}
+                      placeholder="Cualquier detalle que quieras agregar..."
+                      value={form.comentario}
+                      onChange={(e) => set("comentario", e.target.value)}
+                      className="form-input resize-none"
+                    />
                   </div>
-                )}
 
-                <div>
-                  <label className="form-label">Comentario adicional (opcional)</label>
-                  <textarea
-                    rows={2}
-                    placeholder="Cualquier detalle que quieras agregar..."
-                    value={form.comentario} onChange={e => set("comentario", e.target.value)}
-                    className="form-input resize-none"
-                  />
+                  {errorMsg && (
+                    <p className="text-center text-sm text-red-500">
+                      {errorMsg}
+                    </p>
+                  )}
+
+                  <div className="flex gap-3 pt-2">
+                    <button
+                      type="button"
+                      onClick={() => setStep(2)}
+                      className="btn-outline-azul flex-1 text-sm"
+                      style={{ padding: "11px" }}
+                    >
+                      ← Atrás
+                    </button>
+                    <button
+                      type="button"
+                      onClick={handleEnviar}
+                      disabled={loading}
+                      className="btn-primary flex-[2] text-sm"
+                      style={{
+                        padding: "11px",
+                        background: config
+                          ? `linear-gradient(135deg, ${config.color}, ${config.color}cc)`
+                          : undefined,
+                      }}
+                    >
+                      {loading ? "Enviando..." : "Quiero que me contacten ✓"}
+                    </button>
+                  </div>
+
+                  <p className="text-center text-xs text-gray-400">
+                    Tu información es confidencial. No compartimos tus datos.
+                  </p>
                 </div>
-
-                <div className="flex gap-3 pt-2">
-                  <button type="button" onClick={() => setStep(2)} className="btn-outline-azul flex-1 text-sm" style={{ padding: "11px" }}>
-                    ← Atrás
-                  </button>
-                  <button
-                    type="button"
-                    onClick={handleEnviar}
-                    disabled={loading}
-                    className="btn-primary flex-[2] text-sm"
-                    style={{
-                      padding: "11px",
-                      background: config ? `linear-gradient(135deg, ${config.color}, ${config.color}cc)` : undefined,
-                    }}
-                  >
-                    {loading ? "Enviando..." : "Quiero que me contacten ✓"}
-                  </button>
-                </div>
-
-                <p className="text-center text-xs text-gray-400">
-                  Tu información es confidencial. No compartimos tus datos.
-                </p>
-              </div>
-            )}
+              )}
+            </div>
           </div>
         </div>
-
-        {/* Contacto directo debajo del form */}
-       
-      </div>
-    </section>
-        <UbicacionSection />
-        </>
-      
+      </section>
+      <UbicacionSection />
+    </>
   );
 }
+
 function UbicacionSection() {
   return (
     <section className="py-24 bg-white relative overflow-hidden">
       <div className="max-w-6xl mx-auto px-6">
-
-      <h2 className="section-title">Ubicanos</h2>
-
+        <h2 className="section-title">Ubicanos</h2>
 
         <div className="grid md:grid-cols-2 gap-16 items-start">
-
-          {/* INFO PRINCIPAL */}
           <div>
             <h4 className="text-xl font-semibold mb-6 text-[#003087]">
               Nuestras sucursales
@@ -403,12 +645,23 @@ function UbicacionSection() {
               🧭 Cómo llegar con GPS
             </a>
 
-            {/* SUCURSALES */}
             <div className="mt-12 space-y-4">
               {[
-                { nombre: "Patagones (Central)", dir: "Dr. Baraja 312", tel: "02920-475999" },
-                { nombre: "Villalonga", dir: "Sucursal Villalonga", tel: "Consultá por WhatsApp" },
-                { nombre: "Stroeder", dir: "Sucursal Stroeder", tel: "Consultá por WhatsApp" },
+                {
+                  nombre: "Patagones (Central)",
+                  dir: "Dr. Baraja 312",
+                  tel: "02920-475999",
+                },
+                {
+                  nombre: "Villalonga",
+                  dir: "Sucursal Villalonga",
+                  tel: "Consultá por WhatsApp",
+                },
+                {
+                  nombre: "Stroeder",
+                  dir: "Sucursal Stroeder",
+                  tel: "Consultá por WhatsApp",
+                },
               ].map((s, i) => (
                 <div
                   key={i}
@@ -438,7 +691,6 @@ function UbicacionSection() {
                       />
                     </svg>
                   </div>
-
                   <div>
                     <p className="font-bold text-sm text-[#001f5a]">
                       {s.nombre}
@@ -451,13 +703,11 @@ function UbicacionSection() {
             </div>
           </div>
 
-          {/* MAPA */}
           <div className="relative group">
             <div
               className="absolute inset-0 rounded-3xl blur-xl opacity-20 group-hover:opacity-30 transition"
               style={{ background: "#003087" }}
             />
-
             <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-gray-100">
               <iframe
                 src="https://www.google.com/maps?q=Dr.+Baraja+312,+Carmen+de+Patagones,+Buenos+Aires&output=embed"
@@ -466,7 +716,6 @@ function UbicacionSection() {
                 style={{ border: 0 }}
                 loading="lazy"
               />
-
               <a
                 href="https://www.google.com/maps/dir/?api=1&destination=Dr+Baraja+312+Carmen+de+Patagones"
                 target="_blank"
@@ -478,7 +727,6 @@ function UbicacionSection() {
               </a>
             </div>
           </div>
-
         </div>
       </div>
     </section>
