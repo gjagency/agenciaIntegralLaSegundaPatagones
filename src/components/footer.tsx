@@ -77,9 +77,9 @@ export default function Footer() {
 </div>
 
 {/* Imagen al lado */}
-<a href="/" className="flex-shrink-0">
+<a href="/" className="flex flex-col items-center flex-shrink-0 text-center">
   <div
-    className="p-3 rounded-lg"
+    className="p-3 rounded-lg mb-2"
     style={{ background: "rgba(255,255,255,0.08)" }}
   >
     <img
@@ -89,9 +89,14 @@ export default function Footer() {
       className="h-20 w-auto object-contain select-none rounded-lg"
     />
   </div>
-</a>
 
-</div></div>
+  <div className="text-xs font-bold tracking-widest uppercase text-blue-400 leading-tight">
+    <p>TELÉFONO: 2920-461748</p>
+    <p>EMAIL: recepcion@coopatagones.com.ar</p>
+  </div>
+</a>
+</div>
+</div>
 
 
 
