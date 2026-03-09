@@ -659,8 +659,8 @@ function UbicacionSection() {
                 },
                 {
                   nombre: "Stroeder",
-                  dir: "Sucursal Stroeder",
-                  tel: "Consultá por WhatsApp",
+                  dir: "Santa Fe 407",
+                  tel: "2920-403386",
                 },
               ].map((s, i) => (
                 <div
