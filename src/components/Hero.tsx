@@ -41,7 +41,7 @@ export default function Hero() {
                 <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-400" />
               </span>
               <span className="text-xs font-bold tracking-wider text-emerald-50 uppercase">
-                integral de servicios
+                COOP360 AGENCIA INTEGRAL
               </span>
             </div>
 

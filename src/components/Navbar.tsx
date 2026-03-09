@@ -9,11 +9,12 @@ export default function Navbar() {
           {/* Logo principal */}
           <a href="/" className="flex items-center">
             <img
-              src="/coop.png"
+              src="/coop360.svg"
               alt="COOP360"
               draggable={false}
               className="h-19 w-auto object-contain"
             />
+           
           </a>
 
 
