@@ -5,23 +5,7 @@ export default function Navbar() {
 
         {/* 🔹 Marca + Logos */}
         <div className="flex items-center gap-6">
-          {/* Texto institucional */}
-          <div className="flex flex-col leading-tight">
-            <span
-              className="text-2xl font-extrabold tracking-tight"
-              style={{ color: "#003087" }}
-            >
-              COOP360
-            </span>
-
-            <span className="text-sm font-medium text-gray-600 tracking-wide">
-              Agencia Integral
-            </span>
-
-            <span className="text-sm font-medium text-gray-600 tracking-wide">
-              Patagones
-            </span>
-          </div>
+     
           {/* Logo principal */}
           <a href="/" className="flex items-center">
             <img
