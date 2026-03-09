@@ -1,10 +1,10 @@
 export default function Navbar() {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-200 shadow-sm">
-      <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between">
 
         {/* 🔹 Marca + Logos */}
-        <div className="flex items-center gap-6">
+        <div className="flex items-center gap-4 sm:gap-6">
      
           {/* Logo principal */}
           <a href="/" className="flex items-center">
@@ -14,10 +14,7 @@ export default function Navbar() {
               draggable={false}
               className="h-19 w-auto object-contain"
             />
-           
           </a>
-
-
 
           {/* Logo secundario */}
           <a href="/" className="hidden md:flex items-center">
@@ -32,7 +29,7 @@ export default function Navbar() {
         </div>
 
         {/* 🔹 Lado derecho */}
-        <div className="flex items-center gap-6">
+        <div className="flex items-center gap-2 sm:gap-6">
 
           {/* Redes sociales */}
           <div className="hidden md:flex items-center gap-4">
@@ -66,7 +63,7 @@ export default function Navbar() {
           {/* Teléfono */}
           <a
             href="tel:02920475999"
-            className="hidden sm:flex items-center gap-2 text-sm font-semibold text-[#003087] hover:opacity-80 transition"
+            className="hidden sm:flex items-center gap-2 text-sm font-semibold text-[#003087] hover:opacity-80 transition whitespace-nowrap"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
               <path
@@ -78,10 +75,10 @@ export default function Navbar() {
             02920-475999
           </a>
 
-          {/* Botón CTA */}
+          {/* Botón */}
           <a
   href="#cotizar"
-  className="bg-red-600 text-white text-sm font-semibold px-5 py-2 rounded-xl shadow-md hover:bg-red-700 hover:shadow-lg hover:scale-105 transition-all duration-200"
+  className="bg-red-600 text-white text-xs sm:text-sm font-semibold px-3 sm:px-5 py-2 rounded-full hover:bg-red-700 transition whitespace-nowrap shadow-md"
 >
   Cotizá gratis
 </a>
